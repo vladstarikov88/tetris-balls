@@ -1,0 +1,29 @@
+{
+  "name": "vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-livereload": "^0.6.0",
+    "gulp-less": "^3.3.2",
+    "gulp-watch": "^4.3.11",
+    "http-server": "^0.10.0",
+    "npm": "^5.5.1",
+    "tiny-lr": "^1.0.5"
+  },
+  "devDependencies": {
+    "connect": "^2.30.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-imagemin": "^4.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-myth": "^1.1.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}

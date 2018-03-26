@@ -1,0 +1,22 @@
+@import url(import/initial);
+@import url(import/classes);
+@import url(import/app);
+@import url(import/template);
+
+p#result{
+    &::first-letter {
+        text-transform: capitalize;
+    }
+}
+
+section.app{
+    width: 300px;
+    padding: 0;
+    .application{
+        padding: 0;
+        &.canvas{
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
