@@ -11,55 +11,26 @@ var line = [
 ];
 var len = 3;
 
-let style = [];
+var style = [];
 var itemColor = []
 
 var colors = [
     '', 'black', 'orange', 'blue', 'yellow', 'red', 'green', 'purple'
 ];
 
-let temp = [
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 3, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 2, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 7, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 4, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 6, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 4, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 6, 0, 0, 0, 0],
-    [0, 0, 0, 2, 3, 2, 0, 0, 0, 0],
-    [0, 0, 0, 2, 3, 5, 0, 0, 0, 0],
-    [0, 0, 0, 5, 2, 4, 0, 0, 0, 0],
-    [0, 0, 2, 7, 4, 4, 7, 4, 2, 6],
-    [0, 0, 6, 5, 4, 5, 2, 2, 5, 5],
-    [0, 0, 1, 2, 2, 2, 5, 3, 6, 2]
-]
 
-// check if any lines are filled and clear them
-function findEl(arr) {
-    let number;
-    for(var y = ROWS-1; y > 0; y--){
-        for ( var x = 0; x < COLS; x++ ) {
-            let found = 0;
-            if(arr[y][x] !== 0 && x > 0 && y > 0) {
-                if(arr[y][x-1] == arr[y][x] && arr[y][x+1] == arr[y][x]){
-                    arr[y][x-1] = 0;
-                    arr[y][x] = 0;
-                    arr[y][x+1] = 0;
 
-                    clearEmpty(arr);
-                }
-            }
+
+// clears the board
+function init() {
+    for ( var y = 0; y < ROWS; ++y ) {
+        board[ y ] = [];
+        for ( var x = 0; x < COLS; ++x ) {
+            board[ y ][ x ] = 0;
         }
     }
-    return arr;
 }
+
 
 function clearEmpty(arr){
     for(var y = ROWS-1; y > 0; y--){
@@ -118,8 +89,9 @@ function newShape() {
         }
     }
 
+
     console.log(itemColor)
-    console.log(board)
+    /*console.log(board)*/
 
 
     // position where the shape will evolve
@@ -127,28 +99,10 @@ function newShape() {
     currentY = 0;
 }
 
-function rand (size) {
-    let num = Math.round(Math.random() * (size + 1) - 0.5);
-    if(num === -0) {
-        return num = 0;
-    } else{
-        return num
-    }
-}
-
 function randomInteger(min, max) {
     return Math.round(min - 0.5 + Math.random() * (max - min + 1));
 }
 
-// clears the board
-function init() {
-    for ( var y = 0; y < ROWS; ++y ) {
-        board[ y ] = [];
-        for ( var x = 0; x < COLS; ++x ) {
-            board[ y ][ x ] = 0;
-        }
-    }
-}
 
 // keep the element moving down, creating new shapes and clearing lines
 function tick() {
@@ -190,24 +144,31 @@ function rotate( arr ) {
     }
 
     console.log(temp)
+    console.log(arr)
     return arr;
 }
 
 // check if any lines are filled and clear them
 function clearLines() {
-    let number;
+
+    /* Удаление цеполцек в ряд */
     for(var y = 0; y < ROWS; y++){
         for ( var x = 0; x < COLS; x++ ) {
-            let found = 0;
             if(board[y][x] !== 0 && x > 0 && y > 0) {
-                number = board[y][x]
-
-                if(board[y-1][x] == board[y][x] && board[y+1][x] == board[y][x]){
-                    deleteCol(board, y, x);
-                    clearEmpty(board)
-                }
                 if(board[y][x-1] == board[y][x] && board[y][x+1] == board[y][x]){
                     deleteRow(board, y, x);
+                    clearEmpty(board)
+                }
+            }
+        }
+    }
+
+    /* удаление цепочек в столбец */
+    for(var y = 0; y < ROWS-1; y++){
+        for ( var x = 0; x < COLS; x++ ) {
+            if(board[y][x] !== 0) {
+                if(board[y-1][x] == board[y][x] && board[y+1][x] == board[y][x]){
+                    deleteCol(board, y, x);
                     clearEmpty(board)
                 }
             }

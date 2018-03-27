@@ -1,8 +1,6 @@
 var canvas = document.getElementsByTagName( 'canvas' )[ 0 ];
+var ctx = canvas.getContext( '2d' );
 
-let ctx = canvas.getContext( '2d' );
-
-/*var ctx = canvas.getContext( '2d' );*/
 var W = 300,
     H = 600,
 
@@ -30,7 +28,7 @@ function render() {
     }
 
     /* рисуем фигуру */
-    ctx.strokeStyle = 'white';
+    //ctx.strokeStyle = 'white';
     for ( var y = 0; y < len; ++y ) {
         for ( var x = 0; x < len; ++x ) {
             if ( current[ y ][ x ] ) {
