@@ -39,9 +39,7 @@ gulp.task('less', function(){
 });
 
 gulp.task('js', function() {
-    // gulp.src('src/js/**/*.js')
-    gulp.src(['src/js/render.js', 'src/js/controller.js', 'src/js/tetris.js'])
-        .pipe(concat('index.js'))
+    gulp.src('src/js/**/*.js')
         .pipe(gulp.dest('public/js'))
         .pipe(livereload(server))
 });

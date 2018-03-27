@@ -1,23 +1,14 @@
-var canvas = document.getElementsByTagName( 'canvas' )[ 0 ];
-var ctx = canvas.getContext( '2d' );
-
-var W = 300,
-    H = 600,
-
-    BLOCK_W = W / COLS,
-    BLOCK_H = H / ROWS;
-
-// draw a single square at (x, y)
+/* ОТРИСОВКА ОБЪЕКТА */
 function drawBlock( x, y ) {
     ctx.fillRect( BLOCK_W * x, BLOCK_H * y, BLOCK_W - 1, BLOCK_H - 1 );
     ctx.strokeRect( BLOCK_W * x, BLOCK_H * y, BLOCK_W - 1, BLOCK_H - 1 );
 }
 
-// draws the board and the moving shape
+/* ОТСЛЕЖИВАЮЩАЯ ВСЕ ИЗМЕНЕНИЯ ФУНКЦИЯ, КОТОРАЯ ВЫПОЛНЯЕТ ОТРИСОВКУ */
 function render() {
     ctx.clearRect( 0, 0, W, H);
 
-    /* Рисуем полотно */
+    /* ОТРИСОВКА ПОЛОТНА */
     for ( var x = 0; x < COLS; ++x ) {
         for ( var y = 0; y < ROWS; ++y ) {
             if ( board[ y ][ x ] ) {
@@ -27,8 +18,8 @@ function render() {
         }
     }
 
-    /* рисуем фигуру */
-    //ctx.strokeStyle = 'white';
+    /* ОТРИСОВКА ФИГУРЫ */
+    ctx.strokeStyle = 'white';
     for ( var y = 0; y < len; ++y ) {
         for ( var x = 0; x < len; ++x ) {
             if ( current[ y ][ x ] ) {
@@ -39,5 +30,3 @@ function render() {
     }
 }
 
-
-setInterval( render, 30 );
