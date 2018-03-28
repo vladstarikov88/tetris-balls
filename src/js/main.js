@@ -5,6 +5,7 @@ var results_input = document.getElementById('results_input')
 var results_show = document.getElementById('results_show');
 var results_save = document.getElementById('results_save');
 var endgame = document.getElementById('endgame');
+var levels = document.getElementById('levels');
 
 
 
@@ -13,6 +14,7 @@ var endgame = document.getElementById('endgame');
 start.addEventListener("click", function(){
     modal.classList.add('dn');  //очистка окна приветствия
 
+    setGameLevel();             //выбор уровня сложности
     newGame();                  //запуск логики игры
     setInterval( render, 30 );  //запук отрисовки
     controllerEnable();         //включение управления с клавиатуры
@@ -41,21 +43,43 @@ function saveResults() {
     } else {
         console.log('found')
         var cookie = document.cookie.split('; ');
-        var result = {};
+        var result  = [];
+
+        /*
+            Этот комментарий должна удалить
+
+            Внимательно посмотри, как теперь сохраняются данные из куков (в массив, состоящий из объектов со значеинями name и coins (значение будет выводиться в консоли(F12)))
+
+         */
 
         cookie.forEach(function(item, i) {
             item = item.split('=')
-            result[item[0]] = item[1];
+            /* проверка, нет ли неопределенных значений (тоже коммент удалить) */
+            if(item[1] === undefined){
+            } else{
+                result.push({
+                    name: item[0],
+                    coins: item[1]
+                })
+            }
         })
 
-        var globalDiv = document.createElement('div');
-        for(var key in result){
-            var div = document.createElement('div');
-            div.className = "modal_results-item";
-            div.innerHTML = "<p>" + key + "</p>" + "<p>" + result[key] + "</p>";
+        /* сортировка по полю coins */
+        result.sort(compareCoins)
 
-            globalDiv.appendChild(div);
-        }
+        console.log(result)
+
+        var globalDiv = document.createElement('div');
+        result.forEach(function(item, i) {
+            /* Запись первых 10 лучших результатов */
+            if(i < 10) {
+                var div = document.createElement('div');
+                div.className = "modal_results-item";
+                div.innerHTML = "<p>" + item.name + "</p>" + "<p>" + item.coins + "</p>";
+                globalDiv.appendChild(div);
+            }
+
+        })
         console.log(result)
         console.log(globalDiv)
 
@@ -65,7 +89,22 @@ function saveResults() {
     }
 }
 
-
+/* Чем сложнее, тем быстрее двигаются фигуры и тем больше цветов */
+function setGameLevel(){
+    switch(levels.value){
+        case 'easy':
+            speed = 700;
+            break;
+        case 'medium':
+            speed = 500;
+            colors.push('orange', 'purple');
+            break;
+        case 'hard':
+            speed = 200;
+            colors.push('orange', 'purple', 'black', 'hotpink');
+            break;
+    }
+}
 
 /* КОНЕЦ ИГРЫ */
 function endGame(){

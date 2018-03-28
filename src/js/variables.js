@@ -30,9 +30,9 @@ var len = 3;        //высота блока
 var style = [];     //массив цветов
 var itemColor = []; //индекс цвета
 var colors = [
-    '', 'black', 'orange', 'blue', 'yellow', 'red', 'green', 'purple'
+    '', 'blue', 'yellow', 'red', 'green'
 ];
 
 
 var coins = 0;      //очки
-var fast = 700      //скорость
+var speed = 700      //скорость

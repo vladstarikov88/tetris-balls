@@ -126,6 +126,8 @@ function valid( offsetX, offsetY, newCurrent ) {
 function tick() {
     if ( valid( 0, 1 ) ) {
         ++currentY;
+        clearLines();
+        clearEmpty(board);
     }
     // if the element settled
     else {
@@ -146,5 +148,5 @@ function newGame() {
     init();
     newShape();
     lose = false;
-    interval = setInterval( tick, fast );
+    interval = setInterval( tick, speed );
 }
