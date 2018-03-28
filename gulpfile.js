@@ -58,27 +58,8 @@ gulp.task('http-server', function() {
         .use(connect.static('public/'))
         .listen('9000');
 
-    let now = new Time();
-    now.parseTime();
-    now = '[' + now.hours + ':' + now.min + ':' + now.sec + '] ';
-    console.log(now + 'Server listening on http://localhost:9000');
+    console.log('Server listening on http://localhost:9000');
 });
-
-/* Говнокод для изменения формата времени */
-function Time() {
-    this.time = new Date();
-    this.hours = this.time.getHours();
-    this.min = this.time.getMinutes();
-    this.sec = this.time.getSeconds();
-
-    this.parseTime = function() {
-        this.hours > 9 ? 0 : this.hours = 0+''+this.hours;
-        this.min > 9 ? 0 : this.min = 0+''+this.min;
-        this.sec > 9 ? 0 : this.sec = 0+''+this.sec;
-    }
-}
-
-
 
 /* Предварительная сборка проектаб его просмотр и запуск на сервере */
 gulp.task('watch', function() {
@@ -133,8 +114,6 @@ gulp.task('build', function() {
 
     gulp.src('src/less/*.less')
         .pipe(less())
-        .pipe(myth())
-        .pipe(csso())
         .pipe(gulp.dest('build/css'));
 
     /* js */

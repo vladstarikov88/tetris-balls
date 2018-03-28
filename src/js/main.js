@@ -6,13 +6,16 @@ var results_show = document.getElementById('results_show');
 var results_save = document.getElementById('results_save');
 var endgame = document.getElementById('endgame');
 
-/* ОБРАБОТЧИК КНОПКИ "НОВАЯ ИГРА" */
-start.addEventListener("click", function(){
-    modal.classList.add('dn');
 
-    newGame();
-    setInterval( render, 30 );
-    controllerEnable();
+
+
+/* ОБРАБОТЧИК КНОПaaКИ "НОВАЯ ИГРА" */
+start.addEventListener("click", function(){
+    modal.classList.add('dn');  //очистка окна приветствия
+
+    newGame();                  //запуск логики игры
+    setInterval( render, 30 );  //запук отрисовки
+    controllerEnable();         //включение управления с клавиатуры
 });
 
 /* ОБРАБОТЧИК КНОПКИ "ПОКАЗАТЬ РЕЗУЛЬТАТЫ" */

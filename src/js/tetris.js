@@ -103,7 +103,6 @@ function valid( offsetX, offsetY, newCurrent ) {
     newCurrent = newCurrent || current;
 
 
-    console.log(offsetY)
     for ( var y = 0; y < len; ++y ) {
         for ( var x = 0; x < len; ++x ) {
             if ( newCurrent[ y ][ x ] ) {
@@ -147,5 +146,5 @@ function newGame() {
     init();
     newShape();
     lose = false;
-    interval = setInterval( tick, 1000 );
+    interval = setInterval( tick, fast );
 }

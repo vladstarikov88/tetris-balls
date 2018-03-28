@@ -35,3 +35,4 @@ var colors = [
 
 
 var coins = 0;      //очки
+var fast = 700      //скорость
