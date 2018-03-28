@@ -6,10 +6,13 @@ let lr          = require('tiny-lr'),
     csso        = require('gulp-csso'),
     imagemin    = require('gulp-imagemin'),
     uglify      = require('gulp-uglify'),
+    minify      = require('gulp-minify'),
     concat      = require('gulp-concat'),
     connect     = require('connect'),
     watch       = require('gulp-watch'),
     server      = lr();
+
+var pump = require('pump');
 
 gulp.task('html', function() {
     gulp.src('src/*.html')
@@ -135,11 +138,29 @@ gulp.task('build', function() {
         .pipe(gulp.dest('build/css'));
 
     /* js */
-    gulp.src('src/js/**/*.js')
+    gulp.src('src/js/*.js')
         .pipe(gulp.dest('build/js'));
 
     /* image */
     gulp.src('src/img/**/*')
         .pipe(imagemin())
         .pipe(gulp.dest('build/img'));
+});
+
+
+gulp.task('concat', function() {
+    return gulp.src('src/js/*.js')
+        .pipe(concat('index.js'))
+        .pipe(minifyjs())
+        .pipe(gulp.dest('build/js'))
+});
+
+gulp.task('compress', function (cb) {
+  pump([
+        gulp.src('src/js/*.js'),
+        uglify(),
+        gulp.dest('build/js')
+    ],
+    cb
+  );
 });

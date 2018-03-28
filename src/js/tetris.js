@@ -13,7 +13,7 @@ function newShape() {
     var shape = line;
 
     current = [];
-    for(let i = 0; i < len; i++) {
+    for(var i = 0; i < len; i++) {
         itemColor[i] = randomInteger(1, colors.length - 1)
         style[i] = colors[itemColor[i]];
     }
@@ -64,8 +64,6 @@ function rotate( arr ) {
         arr[s][0] = temp[s];
     }
 
-    console.log(temp)
-    console.log(arr)
     return arr;
 }
 
@@ -105,7 +103,7 @@ function valid( offsetX, offsetY, newCurrent ) {
     newCurrent = newCurrent || current;
 
 
-
+    console.log(offsetY)
     for ( var y = 0; y < len; ++y ) {
         for ( var x = 0; x < len; ++x ) {
             if ( newCurrent[ y ][ x ] ) {
@@ -129,16 +127,25 @@ function valid( offsetX, offsetY, newCurrent ) {
 function tick() {
     if ( valid( 0, 1 ) ) {
         ++currentY;
-        clearEmpty(board)
     }
     // if the element settled
     else {
         freeze();
         clearLines();
+        clearEmpty(board);
         if (lose) {
-            newGame();
+            endGame();
+            clearInterval(interval);
             return false;
         }
         newShape();
     }
+}
+
+function newGame() {
+    clearInterval(interval);
+    init();
+    newShape();
+    lose = false;
+    interval = setInterval( tick, 1000 );
 }

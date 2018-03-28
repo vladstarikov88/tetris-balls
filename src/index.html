@@ -9,7 +9,6 @@
 
         <section class="app">
             <div class="app_head">
-                <h1>Три в ряд</h1>
             </div>
             <div class="app_flex">
                 <div class="application canvas">
@@ -18,8 +17,40 @@
             </div>
         </section>
 
-        <div class="modal_wr">
+        <div class="modal_wr" id="modal">
             <div class="modal">
+                <div class="modal_form">
+                    <h1>Три в ряд</h1>
+
+                    <button id="start">Новая игра</button>
+                    <button id="results_show">Показать результаты</button>
+                </div>
+
+                <div id="results" class="modal_results dn">
+                    <div class="modal_results-head bold">
+                        <p>Имя игрока</p>
+                        <p>Очки</p>
+                    </div>
+                    <div id="modal_results-res">
+                        <div class="modal_results-item">
+                            <p class="center w mr">Нет результатов</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal_wr dn" id="endgame">
+            <div class="modal">
+                <div class="modal_form">
+                    <h1>Конец игры</h1>
+                    <div id="final_result">Результат</div>
+
+
+                    <input  id="results_input" type="text" placeholder="Ваше имя">
+                    <button id="results_save">Сохранить результат</button>
+                </div>
+
             </div>
         </div>
 
