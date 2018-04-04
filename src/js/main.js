@@ -8,6 +8,10 @@ var endgame = document.getElementById('endgame');
 var levels = document.getElementById('levels');
 
 
+setGameLevel();             //выбор уровня сложности
+newGame();                  //запуск логики игры
+setInterval( render, 30 );  //запук отрисовки
+controllerEnable();         //включение управления с клавиатуры
 
 
 /* ОБРАБОТЧИК КНОПaaКИ "НОВАЯ ИГРА" */
