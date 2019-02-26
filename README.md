@@ -8,6 +8,3 @@ Simple tetris game (3 in row)
 ```gulp watch``` - запуск
 
 ```gulp build``` - сборка
-
-### Demo
-http://starikov.ml/tetris/
